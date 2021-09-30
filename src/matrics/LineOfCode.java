@@ -2,13 +2,11 @@ package matrics;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-
 import java.io.IOException;
 import java.io.InputStream;
 
-
 public class LineOfCode {
-
+    public static double totalLineOfProject;
 public int countLines(String filename) throws IOException {
     InputStream is = new BufferedInputStream(new FileInputStream(filename));
     try {
@@ -25,7 +23,8 @@ public int countLines(String filename) throws IOException {
         }
         if(endsWithoutNewLine) {
             ++count;
-        } 
+        }
+        totalLineOfProject+=count;
         return count;
     } finally {
         is.close();

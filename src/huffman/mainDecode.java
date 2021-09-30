@@ -21,30 +21,40 @@ public class mainDecode {
     public String compressFile(String path) throws IOException {
 
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a compressed filename:");
-        String filename = sc.next();
-        String compressFilepath = path + "\\" + filename;
+        System.out.print("\tEnter a compressed filename:");
+        String filename = sc.nextLine().trim();
+        String compressFilepath = path+"\\"+filename;
         boolean exist = new mainEncode().checkFileExist(compressFilepath);
-        if (!exist) {
-            System.out.println("File not exist");
-            new Command().command();
+       // if(filename.isEmpty()){
+        //    System.out.println("\tInvalid filename");
+            
+     //   }
 
-        }
-        if (! filename.endsWith(".zip")) {
-            System.out.println("Invalid filename");
-            //   compressFile(p);
-            new Command().command();
+        try {
+            if (filename.endsWith(".zip") && exist == true) {
+                
+                return compressFilepath;
 
+            }
+
+            else {
+                System.out.println("\tInvalid filename");
+                new Command().command();
+
+            }
+        } catch (Exception e) {
+            System.out.println("\tInvalid filename");
         }
+        System.out.println(compressFilepath);
         return compressFilepath;
     }
 
     public String decompressFile(String path) throws IOException {
 
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Decompress file name: ");
+        System.out.print("\tEnter Decompress file name: ");
         // exit();
-        String decompressFileName = sc.next();
+        String decompressFileName = sc.nextLine();
 
         if (!(decompressFileName.endsWith(".txt") | decompressFileName.endsWith(".java"))) {
             System.out.println("Invalid filename");
@@ -55,7 +65,7 @@ public class mainDecode {
         String decompressfilePath = path + "\\" + decompressFileName;
         boolean exist = new mainEncode().checkFileExist(decompressfilePath);
         if (exist) {
-            System.out.println("Same file already exist here");
+            System.out.println("\tSame file already exist here");
             new Command().command();
         }
         return decompressfilePath;

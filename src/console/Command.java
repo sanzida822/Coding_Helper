@@ -1,6 +1,8 @@
 package console;
 
 import code_clone.CloneCheck;
+import huffman.mainDecode;
+import huffman.mainEncode;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import matrics.Average_LOC;
+import matrics.ClassCount;
 import matrics.LineOfCode;
 import matrics.MethodCount;
 import searching.Search;
@@ -21,7 +25,7 @@ public class Command {
     public static String forwardDir;
     String directoryName = null;
     public static String currentPath = null;
-    boolean pexist = false;
+    //  boolean pexist = false;
     //String project;
 
     Scanner scan = new Scanner(System.in);
@@ -39,7 +43,7 @@ public class Command {
             }
 
             String choice = scan.nextLine().trim();
-            Pattern forward = Pattern.compile("\\b(cd)\\b\\s+(.+)");
+            Pattern forward = Pattern.compile("(?i)\\b(cd)\\b\\s+(.+)");
 
             Pattern specialChar = Pattern.compile("[\"*<>\\/://?\\|\\.]+");
             Matcher m = forward.matcher(choice);
@@ -65,10 +69,10 @@ public class Command {
                 System.out.println("For Compress-->fcom");
                 System.out.println("2.For Decompress-->dcom");
             } else if (choice.equalsIgnoreCase("fcom")) {
-             //   new mainEncode().Compress(currentPath);
+                new mainEncode().Compress(currentPath);
 
             } else if (choice.equalsIgnoreCase("dcom")) {
-             //   new mainDecode().Decompress(currentPath);
+                new mainDecode().Decompress(currentPath);
 
             } else if (choice.equalsIgnoreCase("search") | choice.equalsIgnoreCase("3")) {
                 System.out.print("\tWrite \"query\" and projectname:");
@@ -76,13 +80,19 @@ public class Command {
                 Search(currentPath);
                 //  projectPath();
             } else if (choice.equalsIgnoreCase("4")) {
-                System.out.println("\t4.Matrics\n\t\tClass Count-->mc\n\t\tMethod  Count-->cc\n\t\tLine of Code-->loc");
+                System.out.println("\t4.Matrics\n\t\tClass Count-->mc\n\t\tMethod  Count-->cc\n\t\tLine of Code-->loc\n\t\tAverage LOC of a c;ass");
 
             } else if (choice.equalsIgnoreCase("mc") | choice.equalsIgnoreCase("method_count")) {
                 getMethod(currentPath);
 
             } else if (choice.equalsIgnoreCase("Line_Of_Code") | choice.equalsIgnoreCase("LOC")) {
                 LineCode(currentPath);
+
+            } else if (choice.equalsIgnoreCase("ave_loc")) {
+                average_Line_of_Project(currentPath);
+
+            } else if (choice.equalsIgnoreCase("cc")) {
+                getTotalClass(currentPath);
 
             } else if (choice.equalsIgnoreCase("cd")) {
                 currentPath = getcurrentPath();
@@ -139,6 +149,7 @@ public class Command {
 
     }
 
+  
     public void getMethod(String path) throws IOException {
         String newpath = pathGenerate(path);
         try {
@@ -157,8 +168,8 @@ public class Command {
 
                 System.out.println("The program cannot find '" + name + "'");
             }
-        } catch (StringIndexOutOfBoundsException | NullPointerException e) {
-            System.out.println(e);
+        } catch (Exception e) {
+            System.out.println("Invalid input");
 
         }
 
@@ -168,7 +179,7 @@ public class Command {
         String newpath = pathGenerate(Currentpath);
         System.out.print("\tWrite File Name:");
         String fileName = scan.nextLine();
-        String p = newpath + "//" + fileName;
+        String p = newpath + "//" + fileName.trim();
         try {
             Path path = Paths.get(p);
             if (Files.exists(path) && !Files.isDirectory(path)) {
@@ -183,28 +194,52 @@ public class Command {
 
     }
 
-    public void projectPath() throws IOException {
-        ArrayList<String> projectList = new ArrayList<>(2);
-        System.out.print("\t\tFirst Project:");
-        String Firstproject = scan.nextLine().trim();
+    public String Input() {
+        System.out.print("\tWrite the project name:");
+        Scanner scan = new Scanner(System.in);
+        String projectName = scan.nextLine().trim();
+        return projectName;
 
-        System.out.print("\t\tSecond Project:");
+    }
+      public void getTotalClass(String currenctpath) {
+          String newpath = pathGenerate(currenctpath);
+        String projectName=Input();
+        String path = newpath + "\\" + projectName;
+         try {
+            Path p = Paths.get(path);
+            if (Files.exists(p) && Files.isDirectory(p) && !projectName.isEmpty()) {
+                new ClassCount().classCount(path);
 
-        String SecondProject = scan.nextLine().trim();
-        if (!(Firstproject.isEmpty() | SecondProject.isEmpty())) {
-            projectList.clear();
-            projectList.add(Firstproject);
-            projectList.add(SecondProject);
-            pexist = true;
-            projectExist(projectList);
-            if (pexist == true && !projectList.isEmpty()) {
-                CloneCheck ob1 = new CloneCheck();
-
-                ob1.Code_clone(Firstproject, SecondProject);
+            } else if (Files.exists(p) && !Files.isDirectory(p)) {
+                System.out.println("Invalid project name");
+            } else {
+                System.out.println("The program cannot find '" + projectName + "'");
             }
-        } else {
+        } catch (Exception e) {
+            System.out.println("Invalid projectname");
+        }
+        
+      
+    }
 
-            System.out.println("Wrong command");
+
+    public void average_Line_of_Project(String currentpath) {
+        String newpath = pathGenerate(currentpath);
+        String projectName = Input();
+        String path = newpath + "\\" + projectName;
+
+        try {
+            Path p = Paths.get(path);
+            if (Files.exists(p) && Files.isDirectory(p) && !projectName.isEmpty()) {
+                new Average_LOC().totalClass(path);
+
+            } else if (Files.exists(p) && !Files.isDirectory(p)) {
+                System.out.println("Invalid project name");
+            } else {
+                System.out.println("The program cannot find '" + projectName + "'");
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid projectname");
         }
 
     }
@@ -233,11 +268,11 @@ public class Command {
                 }
             }
 
-        } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("Wrong Command");
         } catch (Exception e) {
-            e.printStackTrace();
-        }
+            System.out.println("Wrong Command");
+        }//catch (Exception e) {
+        //   e.printStackTrace();
+        // }
 
     }
 
@@ -259,7 +294,72 @@ public class Command {
 
     }
 
-    public void projectExist(ArrayList<String> projects) throws IOException {
+    public void projectPath() throws IOException {
+        ArrayList<String> projectList = new ArrayList<>(2);
+        System.out.print("\t\tFirst Project:");
+
+        String Firstproject = scan.nextLine().trim();
+        if (Firstproject.length() == 0) {
+            System.out.println("Invalid filename");
+            command();
+        }
+        projectExist(Firstproject);
+        System.out.print("\t\tSecond Project:");
+
+        String SecondProject = scan.nextLine().trim();
+        if (SecondProject.length() == 0) {
+            System.out.println("Invalid filename");
+            command();
+        }
+        projectExist(SecondProject);
+        if (projectExist(Firstproject) && projectExist(SecondProject) && (!(Firstproject.isEmpty() | SecondProject.isEmpty()))) {
+
+            projectList.add(Firstproject);
+            projectList.add(SecondProject);
+            CloneCheck ob1 = new CloneCheck();
+
+            ob1.Code_clone(Firstproject, SecondProject);
+            projectList.clear();
+        } /*    if (!(Firstproject.isEmpty() | SecondProject.isEmpty())) {
+            projectList.clear();
+            projectList.add(Firstproject);
+            projectList.add(SecondProject);
+            pexist = true;
+           // projectExist(projectList);
+            if (pexist == true && !projectList.isEmpty()) {
+                CloneCheck ob1 = new CloneCheck();
+
+                ob1.Code_clone(Firstproject, SecondProject);
+            }
+        } */ else {
+
+            System.out.println("Wrong command");
+        }
+
+    }
+
+    public boolean projectExist(String projectName) throws IOException {
+        boolean exist = false;
+        String projectPath = currentPath + "\\" + projectName;
+        try {
+            Path path = Paths.get(projectPath);
+
+            if (Files.exists(path)) {
+                exist = true;
+            } else {
+                System.out.println("The program cannot find project '" + projectName + "'");
+                //   exist=false;
+                command();
+
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid Input");
+            command();
+        }
+        return exist;
+    }
+
+    /*  public void projectExist(ArrayList<String> projects) throws IOException {
 
         for (int i = 0; i < projects.size(); i++) {
             Path path = null;
@@ -280,7 +380,7 @@ public class Command {
         }
         // projectList.clear();
     }
-
+     */
     public String backDirectory(String newpath) {
         // System.out.println(newpath);
         //  System.out.println(newpath.length());
@@ -320,21 +420,25 @@ public class Command {
 
     public void checkFileExist(String path) {
         Path p1 = Paths.get(path);
-        if (Files.exists(p1)) {
-            forwardDir = p1.toString();
-            currentPath = p1.toString();
-            currentPath = setDirectory(forwardDir).toString();
-            if (currentPath.length() < 3) {
-                currentPath = setDirectory(forwardDir).toString() + "\\";
-            } else {
+        try {
+            if (Files.exists(p1)) {
+                forwardDir = p1.toString();
+                currentPath = p1.toString();
                 currentPath = setDirectory(forwardDir).toString();
+                if (currentPath.length() < 3) {
+                    currentPath = setDirectory(forwardDir).toString() + "\\";
+                } else {
+                    currentPath = setDirectory(forwardDir).toString();
+                }
+                // System.out.println(currentPath);
+                forwardDir = currentPath;
+
+            } else {
+                System.out.println("The program cannot find the path specified.");
+
             }
-            // System.out.println(currentPath);
-            forwardDir = currentPath;
-
-        } else {
-            System.out.println("The program cannot find the path specified.");
-
+        } catch (Exception e) {
+            System.out.println("Invalid path");
         }
 
     }

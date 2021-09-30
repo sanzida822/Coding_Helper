@@ -10,7 +10,6 @@ public class CosineSimilarity {
     public void getCosinesimilarity() {
         double similarity = 0;
         for (int i = 0; i < CloneCheck.ProjectFileName1.size(); i++) {
-            // System.out.println("1=" + CloneCheck.ProjectFileName1.get(i));
             System.out.println("");
             double[] similar;
             //int k = CloneCheck.ProjectFileName2.size();

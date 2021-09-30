@@ -15,8 +15,10 @@ import java.util.LinkedHashMap;
 public class ProjectReader {
 
     public static int count ;
+    public static int classCount;
     public static LinkedHashMap<String, String> projectOne = new LinkedHashMap<>();
     public static LinkedHashMap<String, String> projectTwo = new LinkedHashMap<>();
+    public static ArrayList<String> filename=new ArrayList<>();
 
     public static void fileRead(String fullPath, int i) throws IOException {
         Path folderToWalk = Paths.get(fullPath);
@@ -31,8 +33,11 @@ public class ProjectReader {
                     byte[] p = Files.readAllBytes(f);
                     String s = new String(p, StandardCharsets.UTF_8).trim();
                     if (i == 0) {
+                        classCount++;
                         String dir = f.getParent().toString().substring(f.getParent().toString().lastIndexOf(File.separator) + 1);
+                    
                         //  String fileNamewithPackage = f.getFileName().toString() + "$" + dir+".java";
+                        filename.add(f.getParent().toString().trim()+"\\"+f.getFileName());                      
                         String fileNamewithPackage = dir + "$" + f.getFileName().toString(); //packagename$filename.java
                         //  System.out.println("name="+fileNamewithPackage);
                         projectOne.put(fileNamewithPackage, s);

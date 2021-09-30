@@ -13,7 +13,7 @@ public class MethodCount {
             new Search().processProject(projectPath, ProjectName);
         }
         int totalMethods = ProjectReader.count;
-        System.out.println("Total methods:" + totalMethods);
+        System.out.println("\tTotal methods:" + totalMethods);
         ProjectReader.count = 0;
         Search.ProjectFileName.clear();
     }

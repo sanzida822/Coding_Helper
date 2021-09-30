@@ -33,24 +33,34 @@ public class mainEncode {
     public String mainfile(String path) throws IOException {
         String p = new Command().pathGenerate(path);
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a filename:");//("Enter Encoded file location : ");
+        String mainFilePath="";
+           String filename="";
+        try{
+        System.out.print("\tEnter a filename:");//("Enter Encoded file location : ");
         //   exit();
-        String filename = sc.next();
-        String mainFilePath = p + "\\" + filename;
+         filename = sc.nextLine().trim();
+          mainFilePath = p + "\\" + filename;
         checkFileExist(mainFilePath);
-        boolean fileEmpty = new IO.Filereader().fileEmpty(mainFilePath);
-        if (!(filename.endsWith(".java") | filename.endsWith(".txt"))) {
-            System.out.println("Invalid filename");
+        if (!(filename.endsWith(".java") | filename.endsWith(".txt")) | filename.isEmpty()) {
+            System.out.println("\tInvalid filename");
             new Command().command();
         }
-
-        if (exist == false) {
-            System.out.println("File not exist.");
-             new Command().command();
         }
+       
+        catch(Exception e){
+         //   System.out.println("Invalid filename");
+        
+        }
+        
+        if (!checkFileExist(mainFilePath)) {
+            System.out.println("\tFile not exist.");
+            new Command().command();
+        }
+        boolean fileEmpty = new IO.Filereader().fileEmpty(mainFilePath);
+
 
         if (fileEmpty) {
-            System.out.println("File is empty");
+            System.out.println("\tFile is empty");
             new Command().command();
         }
         return mainFilePath;
@@ -59,27 +69,34 @@ public class mainEncode {
     public String compressFile(String path) throws IOException {
         String p = new Command().pathGenerate(path);
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter compress filename: ");
+        System.out.print("\tEnter compress filename: ");
         // exit();
         String compressFileName = sc.next();
-         String compressfilePath="";
+        String compressfilePath = "";
+        try{
         if (!compressFileName.endsWith(".zip")) {
-            System.out.println("Invalid filename");
-         //   compressFile(p);
-          new Command().command();
-
-        }else{
-            
-         compressfilePath = p + "\\" + compressFileName;
-        checkFileExist(compressfilePath);
-        if (true==exist) {
-            System.out.println("Same file already in this location ");
-            //System.out.println(p);
+            System.out.println("\tInvalid filename");
+            //   compressFile(p);
             new Command().command();
-        }}
-        return compressfilePath;
 
-    }
+        } else {
+
+            compressfilePath = p + "\\" + compressFileName;
+            checkFileExist(compressfilePath);
+        }}catch(Exception e){
+        
+        
+        }
+            if (exist) {
+                System.out.println("\tSame file already in this location ");
+                //System.out.println(p);
+                new Command().command();
+            }
+              return compressfilePath;
+        }
+      
+
+    
 
     /*public void exit() throws IOException {
         if (sc.next().equals("break")) {
@@ -90,10 +107,10 @@ public class mainEncode {
     public boolean checkFileExist(String path) {
         Path p = Paths.get(path);
         File file = new File(path);
-        if (!file.exists() || (Files.isDirectory(p))) {
-            exist = false;
-        } else {
+        if (Files.exists(p) && !Files.isDirectory(p)) {
             exist = true;
+        } else {
+            exist = false;
         }
         return exist;
     }
