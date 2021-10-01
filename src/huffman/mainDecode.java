@@ -1,7 +1,11 @@
 package huffman;
 
 import console.Command;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class mainDecode {
@@ -36,7 +40,10 @@ public class mainDecode {
                 return compressFilepath;
 
             }
-
+            else if(filename.isEmpty()){
+                System.out.println("\tInvalid filename");
+                  new Command().command();
+            }
             else {
                 System.out.println("\tInvalid filename");
                 new Command().command();
@@ -54,20 +61,43 @@ public class mainDecode {
         Scanner sc = new Scanner(System.in);
         System.out.print("\tEnter Decompress file name: ");
         // exit();
-        String decompressFileName = sc.nextLine();
+        String decompressFileName = sc.nextLine().trim();
 
-        if (!(decompressFileName.endsWith(".txt") | decompressFileName.endsWith(".java"))) {
+        if (!(decompressFileName.endsWith(".txt") | decompressFileName.endsWith(".java")) | decompressFileName.isEmpty()) {
             System.out.println("\tInvalid filename");
             //   compressFile(p);
             new Command().command();
 
         }
         String decompressfilePath = path + "\\" + decompressFileName;
-        boolean exist = new mainEncode().checkFileExist(decompressfilePath);
+        boolean exist = checkFileExist(decompressfilePath);
         if (exist) {
             System.out.println("\tSame file already exist here");
-            new Command().command();
+           new Command().command();
         }
         return decompressfilePath;
+    }
+    public boolean checkFileExist(String path) throws IOException{
+        boolean exist=false;
+     try {
+     Path p = Paths.get(path);
+     File file = new File(path);
+     if (Files.exists(p) && !Files.isDirectory(p)){
+         exist=true;
+         new Command().command();
+         
+     }else{    
+     exist=false;
+     }
+     
+     }catch(Exception e){
+         System.out.println("Invalid filename");
+      new Command().command();
+     
+     }
+      
+    
+    return exist;
+    
     }
 }

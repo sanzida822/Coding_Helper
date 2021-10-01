@@ -25,7 +25,7 @@ public class GrepContent {
             ++i;
         } while (openBraces == 0 || openBraces != closedBraces);
         }catch(Exception e){
-          System.out.println(e);
+        //  System.out.println(e);
         }
         result = fileContent.substring(start, i);
 

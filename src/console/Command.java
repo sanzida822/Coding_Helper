@@ -298,19 +298,28 @@ public class Command {
         System.out.print("\t\tFirst Project:");
        try{
         String Firstproject =Input();
-        if (Firstproject.length() == 0) {
-            System.out.println("Invalid filename");
+            //  String FirstprojectPath = currentPath + "\\" + Firstproject;
+          //   File project1=new File(FirstprojectPath);
+        if (Firstproject.length() == 0 | Firstproject.contains(".")) {
+            System.out.println("\tInvalid project name");
             command();
         }
+   
         projectExist(Firstproject);
         System.out.print("\t\tSecond Project:");
 
         String SecondProject = Input();
-        if (SecondProject.length() == 0) {
-            System.out.println("Invalid filename");
+      //   String SecondprojectPath = currentPath + "\\" + SecondProject;
+            // File project2=new File(SecondprojectPath);
+        if (SecondProject.length() == 0 | SecondProject.contains(".")) {
+            System.out.println("\tInvalid project name");
             command();
         }
+           
+             
         projectExist(SecondProject);
+       
+        
         if (projectExist(Firstproject) && projectExist(SecondProject) && (!(Firstproject.isEmpty() | SecondProject.isEmpty()))) {
 
             projectList.add(Firstproject);
@@ -342,12 +351,16 @@ public class Command {
     public boolean projectExist(String projectName) throws IOException {
         boolean exist = false;
         String projectPath = currentPath + "\\" + projectName;
+   
+        
         try {
             Path path = Paths.get(projectPath);
-
+          
             if (Files.exists(path)) {
                exist = true;
-            } else {
+            }
+          
+            else {
                 System.out.println("The program cannot find project '" + projectName + "'");
                 //   exist=false;
                 command();

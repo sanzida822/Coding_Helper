@@ -19,7 +19,7 @@ public class CloneCheck {
 
     public String pathGenerate(String projectName) {
         String currentpath = Command.currentPath;
-     currentpath=   new Command().pathGenerate(currentpath);
+        currentpath = new Command().pathGenerate(currentpath);
         String current = currentpath.replaceAll("\\\\", "-").replace(":", "");//location of current file
         String Pathname = "H:\\2-1\\project\\ProcessAllFiles" + "\\ProcessFile$" + current + "-" + projectName;
 
@@ -28,23 +28,21 @@ public class CloneCheck {
 
     public void getFileListforProject1(String projectOne) throws IOException {
 
-       // String currentpath = Command.currentPath;
-       // String current = currentpath.replaceAll("\\\\", "-").replace(":", "");//location of current file
-       // String Pathname1 = "H:\\coding_helper" + "\\ProcessFile$" + current + "-" + projectone;
-        String Pathname1=pathGenerate(projectOne);
+        // String currentpath = Command.currentPath;
+        // String current = currentpath.replaceAll("\\\\", "-").replace(":", "");//location of current file
+        // String Pathname1 = "H:\\coding_helper" + "\\ProcessFile$" + current + "-" + projectone;
+        String Pathname1 = pathGenerate(projectOne);
         ProjectReader.getFileList(projectOne, Pathname1, ProjectFileName1);
-       
 
     }
-    public void getFileListforProject2(String projectTwo) throws IOException{
-     String Pathname2=pathGenerate(projectTwo);
+
+    public void getFileListforProject2(String projectTwo) throws IOException {
+        String Pathname2 = pathGenerate(projectTwo);
         ProjectReader.getFileList(projectTwo, Pathname2, ProjectFileName2);
-       
-    
-    
+
     }
 
- /*   public void getFileList1(String project1) {
+    /*   public void getFileList1(String project1) {
 
         String currentpath = Command.currentPath;
         String current = currentpath.replaceAll("\\\\", "-").replace(":", "");//location of current file
@@ -75,25 +73,28 @@ public class CloneCheck {
         }
 
     }
-*/
+     */
     public void Code_clone(String project1, String project2) throws IOException {
-        String Pathname1=pathGenerate(project1);
-          String Pathname2=pathGenerate(project2);
-        
+        String Pathname1 = pathGenerate(project1);
+        String Pathname2 = pathGenerate(project2);
+
         File f1 = new File(Pathname1);
         File f2 = new File(Pathname2);
+
         if (f1.exists()) {
-            System.out.println("p1 exist");
+            //   System.out.println("p1 exist");
 
         }
         if (f2.exists()) {
-            System.out.println("p2 exist");
+            //   System.out.println("p2 exist");
 
         }
         if (!f1.exists()) {
             ProjectReader.fileRead(Command.currentPath + "//" + project1, 0);
+          
             Path p1 = Paths.get(Pathname1);
             Files.createDirectories(p1);
+
             for (HashMap.Entry<String, String> entry : ProjectReader.projectOne.entrySet()) {
                 new PreProcessing().ProcessFile(entry.getKey(), entry.getValue(), Pathname1);
             }
@@ -105,6 +106,7 @@ public class CloneCheck {
             //  System.out.println("p2=" + Command.currentPath);
             Path p2 = Paths.get(Pathname2);
             Files.createDirectories(p2);
+
             for (HashMap.Entry<String, String> entry : ProjectReader.projectTwo.entrySet()) {
                 //System.out.println(entry.getKey() + "   " + entry.getValue());
                 new PreProcessing().ProcessFile(entry.getKey(), entry.getValue(), Pathname2);

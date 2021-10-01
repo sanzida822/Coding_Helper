@@ -34,7 +34,7 @@ public class Similarity {
 
     public void getResult() {
         if(SortDescending.isEmpty()){
-            System.out.println("Search query not found");
+            System.out.println("\tSearch query not found");
         }
         LinkedHashMap<String, Double> reverseSorted = new LinkedHashMap<>();
         SortDescending.entrySet()
