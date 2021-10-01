@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ProcessFile {
+public class PreProcessing {
     //  String stemWord="";
 
     public String ProcessFile(String name, String content,String p) throws IOException {
@@ -39,6 +39,7 @@ public class ProcessFile {
         return methodWithoutPunctuation;
     }
 
+   
     public String removeSpace(String fileAsString) {
         String newLineRemove = fileAsString.trim().replace("\n", " ").replace("\r", "");
         String spaceRemove = newLineRemove.replaceAll("\\s+", " ").trim();

@@ -26,7 +26,7 @@ public class CloneCheck {
         return Pathname;
     }
 
-    public void getFileListforProject1(String projectOne) {
+    public void getFileListforProject1(String projectOne) throws IOException {
 
        // String currentpath = Command.currentPath;
        // String current = currentpath.replaceAll("\\\\", "-").replace(":", "");//location of current file
@@ -36,7 +36,7 @@ public class CloneCheck {
        
 
     }
-    public void getFileListforProject2(String projectTwo){
+    public void getFileListforProject2(String projectTwo) throws IOException{
      String Pathname2=pathGenerate(projectTwo);
         ProjectReader.getFileList(projectTwo, Pathname2, ProjectFileName2);
        
@@ -95,7 +95,7 @@ public class CloneCheck {
             Path p1 = Paths.get(Pathname1);
             Files.createDirectories(p1);
             for (HashMap.Entry<String, String> entry : ProjectReader.projectOne.entrySet()) {
-                new ProcessFile().ProcessFile(entry.getKey(), entry.getValue(), Pathname1);
+                new PreProcessing().ProcessFile(entry.getKey(), entry.getValue(), Pathname1);
             }
         }
         getFileListforProject1(project1);
@@ -107,7 +107,7 @@ public class CloneCheck {
             Files.createDirectories(p2);
             for (HashMap.Entry<String, String> entry : ProjectReader.projectTwo.entrySet()) {
                 //System.out.println(entry.getKey() + "   " + entry.getValue());
-                new ProcessFile().ProcessFile(entry.getKey(), entry.getValue(), Pathname2);
+                new PreProcessing().ProcessFile(entry.getKey(), entry.getValue(), Pathname2);
             }
 
         }

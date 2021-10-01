@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import matrics.Average_LOC;
-import matrics.ClassCount;
-import matrics.LineOfCode;
-import matrics.MethodCount;
+import matrices.Average_LOC;
+import matrices.ClassCount;
+import matrices.LineOfCode;
+import matrices.MethodCount;
 import searching.Search;
 
 public class Command {
@@ -149,18 +149,18 @@ public class Command {
 
     }
 
-  
-    public void getMethod(String path) throws IOException {
+    public void getMethod(String path) throws IOException {      //Count total number of methods of a project/java file
+        
         String newpath = pathGenerate(path);
         try {
             System.out.print("\tProject\\File Name:");
-            String name = scan.nextLine();
+            String name = Input();
             String projectPath = newpath + "\\" + name;
             Path filepath = Paths.get(projectPath);
-            if (Files.exists(filepath) && Files.isDirectory(filepath) && !name.trim().isEmpty()) {
-                System.out.println("project");
+            if (Files.exists(filepath) && Files.isDirectory(filepath) && !name.isEmpty()) {
+              //  System.out.println("project");
                 new MethodCount().getTotalMethods(projectPath, name);
-            } else if (Files.exists(filepath) && !Files.isDirectory(filepath) && !name.trim().isEmpty()) {
+            } else if (Files.exists(filepath) && !Files.isDirectory(filepath) && !name.isEmpty()) {
                 String file = filepath.toString();
                 new MethodCount().getTotalMethods(projectPath, name);
 
@@ -176,10 +176,10 @@ public class Command {
     }
 
     public void LineCode(String Currentpath) throws IOException {
-        String newpath = pathGenerate(Currentpath);
-        System.out.print("\tWrite File Name:");
-        String fileName = scan.nextLine();
-        String p = newpath + "//" + fileName.trim();
+        String newpath = pathGenerate(Currentpath);    //count total number of line of a java file
+        System.out.print("\tWrite the file name:");
+       String fileName=Input();
+        String p = newpath + "\\" + fileName.trim();
         try {
             Path path = Paths.get(p);
             if (Files.exists(path) && !Files.isDirectory(path)) {
@@ -193,19 +193,20 @@ public class Command {
         }
 
     }
+  
 
     public String Input() {
-        System.out.print("\tWrite the project name:");
         Scanner scan = new Scanner(System.in);
         String projectName = scan.nextLine().trim();
         return projectName;
 
     }
-      public void getTotalClass(String currenctpath) {
-          String newpath = pathGenerate(currenctpath);
-        String projectName=Input();
+
+    public void getTotalClass(String currenctpath) {    //Count total number of class of a projct
+        String newpath = pathGenerate(currenctpath);
+        String projectName = Input();
         String path = newpath + "\\" + projectName;
-         try {
+        try {
             Path p = Paths.get(path);
             if (Files.exists(p) && Files.isDirectory(p) && !projectName.isEmpty()) {
                 new ClassCount().classCount(path);
@@ -216,20 +217,19 @@ public class Command {
                 System.out.println("The program cannot find '" + projectName + "'");
             }
         } catch (Exception e) {
-            System.out.println("Invalid projectname");
+            System.out.println("Invalid project name");
         }
-        
-      
+
     }
 
-
-    public void average_Line_of_Project(String currentpath) {
-        String newpath = pathGenerate(currentpath);
+    public void average_Line_of_Project(String currentpath) { //average line of code of a class
+        String newpath = pathGenerate(currentpath);        
+        System.out.print("\tWrite the project name:");
         String projectName = Input();
         String path = newpath + "\\" + projectName;
 
         try {
-            Path p = Paths.get(path);
+            Path p = Paths.get(path);        
             if (Files.exists(p) && Files.isDirectory(p) && !projectName.isEmpty()) {
                 new Average_LOC().totalClass(path);
 
@@ -255,7 +255,6 @@ public class Command {
             Path filepath = Paths.get(p);
             if ((projectName.isEmpty() && !query.isEmpty()) || (query.isEmpty() && !projectName.isEmpty())) {
                 System.out.println("Wrong Command");
-                //Search(currentPath);
             } else if (query.isEmpty() && projectName.isEmpty()) {
                 System.out.println("Wrong Command");
             } else {
@@ -284,7 +283,7 @@ public class Command {
     }
 
     public String pathGenerate(String path) {
-        // System.out.println("p="+path);
+        // System.out.println("p="+path);          //remove the last backslash from a path 
         String newPath = path;
         if (path.endsWith("\\")) {
             newPath = path.substring(0, path.length() - 1);
@@ -294,11 +293,11 @@ public class Command {
 
     }
 
-    public void projectPath() throws IOException {
+    public void projectPath() throws IOException {         
         ArrayList<String> projectList = new ArrayList<>(2);
         System.out.print("\t\tFirst Project:");
-
-        String Firstproject = scan.nextLine().trim();
+       try{
+        String Firstproject =Input();
         if (Firstproject.length() == 0) {
             System.out.println("Invalid filename");
             command();
@@ -306,7 +305,7 @@ public class Command {
         projectExist(Firstproject);
         System.out.print("\t\tSecond Project:");
 
-        String SecondProject = scan.nextLine().trim();
+        String SecondProject = Input();
         if (SecondProject.length() == 0) {
             System.out.println("Invalid filename");
             command();
@@ -334,6 +333,8 @@ public class Command {
         } */ else {
 
             System.out.println("Wrong command");
+        }}catch(Exception e){
+        
         }
 
     }
@@ -345,7 +346,7 @@ public class Command {
             Path path = Paths.get(projectPath);
 
             if (Files.exists(path)) {
-                exist = true;
+               exist = true;
             } else {
                 System.out.println("The program cannot find project '" + projectName + "'");
                 //   exist=false;
@@ -382,8 +383,6 @@ public class Command {
     }
      */
     public String backDirectory(String newpath) {
-        // System.out.println(newpath);
-        //  System.out.println(newpath.length());
         String result = null;
         if (newpath.length() > 3) {    //show stringIndexoutofboundException
             result = newpath.substring(0, newpath.lastIndexOf("\\") + 1);

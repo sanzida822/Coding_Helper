@@ -1,5 +1,5 @@
 
-package matrics;
+package matrices;
 
 import IO.ProjectReader;
 import java.math.BigDecimal;

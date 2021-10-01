@@ -1,4 +1,4 @@
-package matrics;
+package matrices;
 
 import IO.ProjectReader;
 

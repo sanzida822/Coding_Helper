@@ -57,7 +57,7 @@ public class mainDecode {
         String decompressFileName = sc.nextLine();
 
         if (!(decompressFileName.endsWith(".txt") | decompressFileName.endsWith(".java"))) {
-            System.out.println("Invalid filename");
+            System.out.println("\tInvalid filename");
             //   compressFile(p);
             new Command().command();
 

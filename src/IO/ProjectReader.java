@@ -1,6 +1,7 @@
 
 package IO;
 
+import console.Command;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -56,10 +57,16 @@ public class ProjectReader {
 
     }
 
-    public static void getFileList(String projectname, String pathname, ArrayList<String> projectFile) {
+    public static void getFileList(String projectname, String pathname, ArrayList<String> projectFile) throws IOException {
 
         File folder = new File(pathname);
         File[] listOfFiles = folder.listFiles();
+     
+      if(listOfFiles.length==0){
+          System.out.println("\tThe prject doesnot have any java file");
+          folder.delete();
+          new Command().command();
+      }
          count=0;
         for (int i = 0; i < listOfFiles.length; i++) {
            

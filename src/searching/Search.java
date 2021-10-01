@@ -40,7 +40,9 @@ public class Search {
                     // System.out.println("path="+filePath);
                     //  System.out.println("content="+content);
                     filename.add(fileNamewithPackage);
+                    
                     if (!fileNamewithPackage.isEmpty() && !content.isEmpty()) {
+                        
                         new MethodFind().getMethod(fileNamewithPackage, content, filePath, processfilePath);
                         new MethodFind().getConstructor(fileNamewithPackage, content, filePath, processfilePath);
                     }
@@ -52,7 +54,7 @@ public class Search {
         }
         );
         if (filename.isEmpty()) {
-            System.out.println("Project doesnot have any java file");
+            System.out.println("\tProject doesnot have any java file");
         }
     }
 
@@ -94,7 +96,7 @@ public class Search {
     return Pathname;
     
     }
-    public void getProjectFile(String projectname) {
+    public void getProjectFile(String projectname) throws IOException {
      //   String currentpath = Command.currentPath;
         //String path = new Command().pathGenerate(currentpath);
        // String current = path.replaceAll("\\\\", "-").replace(":", "");

@@ -2,7 +2,7 @@ package searching;
 
 import IO.Filewriter;
 import code_clone.Porter_stemmer;
-import code_clone.ProcessFile;
+import code_clone.PreProcessing;
 import console.Command;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class ProcessSearchFile {
         String currentpath = Command.currentPath;
         String current = currentpath.replaceAll("\\\\", "-").replace(":", "");//location of current file
         String stemWord = "";
-        ProcessFile ob = new ProcessFile();
+        PreProcessing ob = new PreProcessing();
         String removePuncuation = ob.removePunctuation(fileContent);
         String methodWithoutKey = ob.removeKeyword(removePuncuation);
         String methodWithoutSpace = ob.removeSpace(methodWithoutKey);
@@ -33,7 +33,7 @@ public class ProcessSearchFile {
 
     public String queryProcess(String query) throws IOException {
         String stemWord = "";
-        ProcessFile ob = new ProcessFile();
+        PreProcessing ob = new PreProcessing();
         String removePuncuation = ob.removePunctuation(query);
         String methodWithoutKey = ob.removeKeyword(removePuncuation);
         String methodWithoutSpace = ob.removeSpace(methodWithoutKey);

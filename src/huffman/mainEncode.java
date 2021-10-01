@@ -88,7 +88,7 @@ public class mainEncode {
         
         }
             if (exist) {
-                System.out.println("\tSame file already in this location ");
+                System.out.println("\tSame file already exist in this location ");
                 //System.out.println(p);
                 new Command().command();
             }
