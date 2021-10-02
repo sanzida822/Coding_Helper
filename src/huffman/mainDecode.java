@@ -26,6 +26,8 @@ public class mainDecode {
 
         Scanner sc = new Scanner(System.in);
         System.out.print("\tEnter a compressed filename:");
+
+
         String filename = sc.nextLine().trim();
         String compressFilepath = path+"\\"+filename;
         boolean exist = new mainEncode().checkFileExist(compressFilepath);
@@ -39,6 +41,9 @@ public class mainDecode {
                 
                 return compressFilepath;
 
+            }else if(!exist){
+                System.out.println("\tFile not  exist");
+                new Command().command();
             }
             else if(filename.isEmpty()){
                 System.out.println("\tInvalid filename");
@@ -52,7 +57,7 @@ public class mainDecode {
         } catch (Exception e) {
             System.out.println("\tInvalid filename");
         }
-        System.out.println(compressFilepath);
+        //System.out.println(compressFilepath);
         return compressFilepath;
     }
 
@@ -70,20 +75,21 @@ public class mainDecode {
 
         }
         String decompressfilePath = path + "\\" + decompressFileName;
-        boolean exist = checkFileExist(decompressfilePath);
+        boolean exist = checkfileExist(decompressfilePath);
         if (exist) {
             System.out.println("\tSame file already exist here");
            new Command().command();
         }
         return decompressfilePath;
     }
-    public boolean checkFileExist(String path) throws IOException{
+    public boolean checkfileExist(String path) throws IOException{
         boolean exist=false;
      try {
      Path p = Paths.get(path);
      File file = new File(path);
      if (Files.exists(p) && !Files.isDirectory(p)){
          exist=true;
+         System.out.println("\tSame file already exist");
          new Command().command();
          
      }else{    
