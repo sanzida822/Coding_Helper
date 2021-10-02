@@ -2,7 +2,7 @@ package matrices;
 
 import IO.ProjectReader;
 
-public class ClassCount {
+public class FileCount {
 
     public int classCount(String path) {
         int totalClass=0;
@@ -10,7 +10,7 @@ public class ClassCount {
         try {
             ProjectReader.fileRead(path, 0);
             totalClass = ProjectReader.classCount;
-            System.out.println("\tTotal number of class:" + totalClass);
+            System.out.println("\tTotal number of file:" + totalClass);
             ProjectReader.classCount = 0;
         } catch (Exception e) {
             System.out.println("Invalid Input");

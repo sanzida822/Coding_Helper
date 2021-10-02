@@ -15,7 +15,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import matrices.Average_LOC;
-import matrices.ClassCount;
+import matrices.FileCount;
 import matrices.LineOfCode;
 import matrices.MethodCount;
 import searching.Search;
@@ -55,19 +55,19 @@ public class Command {
 
             if (choice.equalsIgnoreCase("help")) {
                 System.out.println("\t1.clone");
-                System.out.println("\t2.File_Compression");
+                System.out.println("\t2.File_Compress & File_Decompress");
                 System.out.println("\t3.Search");
-                System.out.println("\t4.Matrics\n\t\tClass Count-->mc\n\t\tMethod  Count-->cc\n\t\tLine of Code-->loc");
+                System.out.println("\t4.Matrices\n\t\tFile Count-->fc\n\t\tMethod  Count-->mc\n\t\tLine of Code-->loc\n\tAverage line of Code-->a_loc");
                 System.out.println("\t5.exit");
 
             } else if (choice.equalsIgnoreCase("clone") | choice.equalsIgnoreCase("1")) {
 
-                System.out.println("\tSelect two different project:");
+                System.out.println("\tSelect two project:");
                 projectPath();
 
-            } else if (choice.equalsIgnoreCase("File_Compress") | choice.equalsIgnoreCase("2")) {
-                System.out.println("For Compress-->fcom");
-                System.out.println("2.For Decompress-->dcom");
+            } else if (choice.equalsIgnoreCase("File_Compress & File_Decompress") | choice.equalsIgnoreCase("2")) {
+                System.out.println("\t\tFor Compress-->fcom");
+                System.out.println("\t\tFor Decompress-->dcom");
             } else if (choice.equalsIgnoreCase("fcom")) {
                 new mainEncode().Compress(currentPath);
 
@@ -79,8 +79,8 @@ public class Command {
                 //   System.out.println("x=" + currentPath);
                 Search(currentPath);
                 //  projectPath();
-            } else if (choice.equalsIgnoreCase("4")) {
-                System.out.println("\t4.Matrics\n\t\tClass Count-->mc\n\t\tMethod  Count-->cc\n\t\tLine of Code-->loc\n\t\tAverage LOC of a c;ass");
+            } else if (choice.equalsIgnoreCase("4")| choice.equalsIgnoreCase("Matrices")) {
+                System.out.println("\t4.Matrics\n\t\tJava File Count-->fc\n\t\tMethod  Count-->mc\n\t\tLine of Code-->loc\n\t\tAverage LOC of a class");
 
             } else if (choice.equalsIgnoreCase("mc") | choice.equalsIgnoreCase("method_count")) {
                 getMethod(currentPath);
@@ -88,10 +88,10 @@ public class Command {
             } else if (choice.equalsIgnoreCase("Line_Of_Code") | choice.equalsIgnoreCase("LOC")) {
                 LineCode(currentPath);
 
-            } else if (choice.equalsIgnoreCase("ave_loc")) {
+            } else if (choice.equalsIgnoreCase("a_loc")|choice.equalsIgnoreCase("average LOc of a Class")) {
                 average_Line_of_Project(currentPath);
 
-            } else if (choice.equalsIgnoreCase("cc")) {
+            } else if (choice.equalsIgnoreCase("fc")| choice.equalsIgnoreCase("File_Cunt")) {
                 getTotalClass(currentPath);
 
             } else if (choice.equalsIgnoreCase("cd")) {
@@ -204,12 +204,13 @@ public class Command {
 
     public void getTotalClass(String currenctpath) {    //Count total number of class of a projct
         String newpath = pathGenerate(currenctpath);
+        System.out.print("\tWrite Project name:");
         String projectName = Input();
         String path = newpath + "\\" + projectName;
         try {
             Path p = Paths.get(path);
             if (Files.exists(p) && Files.isDirectory(p) && !projectName.isEmpty()) {
-                new ClassCount().classCount(path);
+                new FileCount().classCount(path);
 
             } else if (Files.exists(p) && !Files.isDirectory(p)) {
                 System.out.println("Invalid project name");

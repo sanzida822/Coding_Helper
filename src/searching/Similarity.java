@@ -1,6 +1,8 @@
 package searching;
 
 import code_clone.CosineSimilarity;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -21,9 +23,12 @@ public class Similarity {
 
             for (int j = 0; j < queryTfIdfVector.size(); j++) {
                 similarity = new CosineSimilarity().cosineSimilarity(TfIdfCalculate.tfidfvectorProject.get(i), TfIdfCalculate.queryTfIdfVector.get(j));
-                //  System.out.println(Search.ProjectFileName.get(i) + "=" + similarity);
-                if (similarity > 0) {
-                    SortDescending.put(Search.ProjectFileName.get(i), similarity);
+               BigDecimal bd = new BigDecimal(similarity).setScale(2, RoundingMode.HALF_UP);
+                double getSimilar = bd.doubleValue();
+                
+//  System.out.println(Search.ProjectFileName.get(i) + "=" + similarity);
+                if (getSimilar > 0) {
+                    SortDescending.put(Search.ProjectFileName.get(i), getSimilar);
 
                 }
 
@@ -46,7 +51,7 @@ public class Similarity {
         // System.out.println("");
         for (Map.Entry<String, Double> pair : reverseSorted.entrySet()) {
 
-            System.out.println(pair.getKey() + " " + pair.getValue());
+            System.out.println(pair.getKey() + " " + pair.getValue()+"%");
         }
         SortDescending.clear();
 

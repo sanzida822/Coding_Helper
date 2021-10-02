@@ -18,7 +18,7 @@ public class Decompress {
 	public void decompressFile() {
 	         
 		Huffman.writeDecodedFile(this.sourceFilePath, this.targetFilePath);
-		System.out.println("==== Wrote Decompressed File to " + this.targetFilePath + " ====");
+		System.out.println("==== Write Decompressed File to " + this.targetFilePath + " ====");
 		
 	}
 

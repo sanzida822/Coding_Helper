@@ -75,7 +75,7 @@ public class CloneCheck {
     }
      */
     public void Code_clone(String project1, String project2) throws IOException {
-        String Pathname1 = pathGenerate(project1);
+        String Pathname1 = pathGenerate(project1);  //H:\2-1\project\ProcessAllFiles\ProcessFile$H-new
         String Pathname2 = pathGenerate(project2);
 
         File f1 = new File(Pathname1);
@@ -96,7 +96,7 @@ public class CloneCheck {
             Files.createDirectories(p1);
 
             for (HashMap.Entry<String, String> entry : ProjectReader.projectOne.entrySet()) {
-                new PreProcessing().ProcessFile(entry.getKey(), entry.getValue(), Pathname1);
+                new PreProcessing().ProcessFile(entry.getKey(), entry.getValue(), Pathname1); //entry.getKey()-filename with package
             }
         }
         getFileListforProject1(project1);
@@ -123,7 +123,7 @@ public class CloneCheck {
         ob.tfIdfVectorProject2();
         CosineSimilarity sim = new CosineSimilarity();
         sim.getCosinesimilarity();
-        sim.getAverage();
+       // sim.getAverage();
         // BoxAndWhiskerChart.BoxWhisker();
         new BoxAndWhiskerChart().display();
         CosineSimilarity.similarArray.clear();
@@ -132,6 +132,7 @@ public class CloneCheck {
         ProjectReader.projectTwo.clear();
 
         TfIdfCalculate.tfidfvectorProject1.clear();
+
         TfIdfCalculate.tfidfvectorProject2.clear();
         ProjectFileName1.clear();
         ProjectFileName2.clear();

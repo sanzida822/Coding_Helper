@@ -1,11 +1,13 @@
 package code_clone;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class CosineSimilarity {
 
     public static ArrayList<double[]> similarArray = new ArrayList<double[]>();
-    public static ArrayList<Double> clone = new ArrayList<>();
+   // public static ArrayList<Double> clone = new ArrayList<>();
 
     public void getCosinesimilarity() {
         double similarity = 0;
@@ -18,9 +20,11 @@ public class CosineSimilarity {
             // similar = new double[TfIdfCalculate.tfidfvectorProject2.size() + 1];
             for (int j = 0; j < CloneCheck.ProjectFileName2.size(); j++) {
                 similarity = cosineSimilarity(TfIdfCalculate.tfidfvectorProject1.get(i), TfIdfCalculate.tfidfvectorProject2.get(j));
-                System.out.println(CloneCheck.ProjectFileName1.get(i) + " vs " + CloneCheck.ProjectFileName2.get(j) + " " + similarity + "%");
+                BigDecimal bd = new BigDecimal(similarity).setScale(2, RoundingMode.HALF_UP);
+                double getSimilar = bd.doubleValue();
+                System.out.println(CloneCheck.ProjectFileName1.get(i) + " vs " + CloneCheck.ProjectFileName2.get(j) + " " + getSimilar + "%");
                 similar[count] = similarity;
-                clone.add(similarity);
+             //   clone.add(similarity);
 
                 count++;
             }
@@ -55,7 +59,7 @@ public class CosineSimilarity {
 
     }
 
-    public void getAverage() {
+   /* public void getAverage() {
         double sum = 0;
         for (int i = 0; i < clone.size(); i++) {
           //  System.out.println(clone.get(i));
@@ -65,6 +69,6 @@ public class CosineSimilarity {
         double average = sum /clone.size();
      //   System.out.println(average);
 
-    }
+    }*/
 
 }

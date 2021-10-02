@@ -11,7 +11,7 @@ public class Filewriter {
   
     public String createProcessFile(String filename, String fileContent,String path) throws IOException {
       Path p=Paths.get(path);    
-        String newFilename = filename.replaceAll(".{4}$", "txt");
+        String newFilename = filename.replaceAll(".{5}$", ".txt");
         Path newpath = Paths.get(path);
         BufferedWriter br = new BufferedWriter(new FileWriter(path + "//" + newFilename));
         br.write(fileContent);

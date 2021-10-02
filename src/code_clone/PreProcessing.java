@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class PreProcessing {
     //  String stemWord="";
 
-    public String ProcessFile(String name, String content,String p) throws IOException {
+    public String ProcessFile(String filename, String content,String p) throws IOException {
         String stemWord = "";
         String methodWithotPunctuation = removePunctuation(content);
         String methodWithoutKey = removeKeyword(methodWithotPunctuation);
@@ -25,7 +25,7 @@ public class PreProcessing {
         //  System.out.println("" + stemWord.trim());
         Filewriter writer = new Filewriter(); //fileWriter class objeect
 
-        String path = writer.createProcessFile(name, stemWord.trim(),p);
+        String path = writer.createProcessFile(filename, stemWord.trim(),p);  //filename-filename with package
 
         return path;
     }
