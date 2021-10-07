@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/H:/2-1/project/Coding_Helper/src/code_clone/getTfIdf.java</file>
-            <file>file:/H:/2-1/project/Coding_Helper/src/code_clone/CosineSimilarity.java</file>
-            <file>file:/H:/2-1/project/Coding_Helper/src/matrices/FileCount.java</file>
-            <file>file:/H:/2-1/project/Coding_Helper/src/console/Command.java</file>
-            <file>file:/H:/2-1/project/Coding_Helper/src/searching/ProcessSearchFile.java</file>
-            <file>file:/H:/2-1/project/Coding_Helper/src/IO/Filewriter.java</file>
-            <file>file:/H:/2-1/project/Coding_Helper/src/huffman/Huffman.java</file>
-            <file>file:/H:/2-1/project/Coding_Helper/src/code_clone/CloneCheck.java</file>
-            <file>file:/H:/2-1/project/Coding_Helper/src/code_clone/TfIdfCalculate.java</file>
-            <file>file:/H:/2-1/project/Coding_Helper/src/huffman/mainDecode.java</file>
-            <file>file:/H:/2-1/project/Coding_Helper/src/huffman/mainEncode.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
