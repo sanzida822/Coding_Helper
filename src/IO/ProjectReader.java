@@ -40,7 +40,7 @@ public class ProjectReader {
                         //  String fileNamewithPackage = f.getFileName().toString() + "$" + dir+".java";
                         filename.add(f.getParent().toString().trim() + "\\" + f.getFileName());
                         String fileNamewithPackage = dir + "$" + f.getFileName().toString(); //packagename$filename.java
-                        //  System.out.println("name="+fileNamewithPackage);
+                       //  System.out.println("name="+f.getFileName());
                         projectOne.put(fileNamewithPackage, s);
 
                     }

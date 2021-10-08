@@ -1,8 +1,8 @@
 package console;
 
 import code_clone.CloneCheck;
-import huffman.mainDecode;
-import huffman.mainEncode;
+import huffman_mamun.mainDecode;
+import huffman_mamun.mainEncode;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import matrices.Average_LOC;
-import matrices.FileCount;
-import matrices.LineOfCode;
-import matrices.MethodCount;
+//import metrics.Average_LOC;
+//import metrics.FileCount;
+//import metrics.LineOfCode;
+//import metrics.MethodCount;
 import searching.Search;
 
 public class Command {
@@ -159,10 +159,10 @@ public class Command {
             Path filepath = Paths.get(projectPath);
             if (Files.exists(filepath) && Files.isDirectory(filepath) && !name.isEmpty()) {
               //  System.out.println("project");
-                new MethodCount().getTotalMethods(projectPath, name);
+         ///       new MethodCount().getTotalMethods(projectPath, name);
             } else if (Files.exists(filepath) && !Files.isDirectory(filepath) && !name.isEmpty()) {
                 String file = filepath.toString();
-                new MethodCount().getTotalMethods(projectPath, name);
+            //    new MethodCount().getTotalMethods(projectPath, name);
 
             } else {
 
@@ -183,8 +183,8 @@ public class Command {
         try {
             Path path = Paths.get(p);
             if (Files.exists(path) && !Files.isDirectory(path)) {
-                int totalLine = new LineOfCode().countLines(path.toString());
-                System.out.println("\tLine of " + fileName + " is " + totalLine);
+            //    int totalLine = new LineOfCode().countLines(path.toString());
+             //   System.out.println("\tLine of " + fileName + " is " + totalLine);
             } else {
                 System.out.println("The program cannot find '" + fileName + "'");
             }
@@ -210,7 +210,7 @@ public class Command {
         try {
             Path p = Paths.get(path);
             if (Files.exists(p) && Files.isDirectory(p) && !projectName.isEmpty()) {
-                new FileCount().classCount(path);
+            //    new FileCount().classCount(path);
 
             } else if (Files.exists(p) && !Files.isDirectory(p)) {
                 System.out.println("Invalid project name");
@@ -232,7 +232,7 @@ public class Command {
         try {
             Path p = Paths.get(path);        
             if (Files.exists(p) && Files.isDirectory(p) && !projectName.isEmpty()) {
-                new Average_LOC().totalClass(path);
+            //    new Average_LOC().totalClass(path);
 
             } else if (Files.exists(p) && !Files.isDirectory(p)) {
                 System.out.println("Invalid project name");
