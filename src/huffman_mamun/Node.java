@@ -1,4 +1,4 @@
-package huffman;
+package huffman_mamun;
 
 
 public class Node implements Comparable<Node> {

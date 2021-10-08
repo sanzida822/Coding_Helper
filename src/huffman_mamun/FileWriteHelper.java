@@ -1,4 +1,4 @@
-package huffman;
+package huffman_mamun;
 
 import java.io.File;
 import java.io.FileOutputStream;

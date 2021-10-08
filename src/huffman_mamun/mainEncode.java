@@ -1,4 +1,4 @@
-package huffman;
+package huffman_mamun;
 
 import console.Command;
 import java.io.File;

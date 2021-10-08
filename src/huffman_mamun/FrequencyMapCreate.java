@@ -1,4 +1,4 @@
-package huffman;
+package huffman_mamun;
 
 import java.util.HashMap;
 import java.util.Map;
