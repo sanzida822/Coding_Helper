@@ -81,7 +81,7 @@ public class Command {
                 Search(currentPath);
                 //  projectPath();
             } else if (choice.equalsIgnoreCase("4")| choice.equalsIgnoreCase("Matrices")) {
-                System.out.println("\t4.Matrics\n\t\tJava File Count-->fc\n\t\tMethod  Count-->mc\n\t\tLine of Code-->loc\n\t\tAverage LOC of a class");
+                System.out.println("\t4.Metrics\n\t\tJava File Count-->fc\n\t\tMethod  Count-->mc\n\t\tLine of Code-->loc\n\t\tAverage LOC of a class");
 
             } else if (choice.equalsIgnoreCase("mc") | choice.equalsIgnoreCase("method_count")) {
                 getMethod(currentPath);
