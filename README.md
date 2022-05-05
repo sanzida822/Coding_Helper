@@ -7,8 +7,8 @@ Code clone undoubtedly leads to problems during software maintenance and support
 - Searching concept location of a query
 - Metrics
   - Count total number of java files in a java project
-  - Count total number of methods in a java project/file
-  - Calculate average line of code in a class
+  - Count total number of methods in a java file/project
+  - Calculate average line of code in a java project
   - Count line of code in a java file
 # Contributors
 ```
